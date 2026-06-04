@@ -6,12 +6,12 @@ import {
 import { supabase } from '../lib/supabase'
 import GlowBackground from '../components/GlowBackground'
 
-const GROQ_API_KEY = process.env.EXPO_PUBLIC_GROQ_API_KEY
+const GROQ_API_KEY = process.env.EXPO_PUBLIC_GROQ_API_KEY || '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'
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
 
-if (!GROQ_API_KEY) {
+if (!process.env.EXPO_PUBLIC_GROQ_API_KEY) {
   console.warn(
-    'Groq API Key (EXPO_PUBLIC_GROQ_API_KEY) is missing! Please check your .env file.'
+    'Groq API Key (EXPO_PUBLIC_GROQ_API_KEY) is missing! Using fallback Groq API key.'
   )
 }
 
