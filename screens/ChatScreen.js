@@ -6,14 +6,8 @@ import {
 import { supabase } from '../lib/supabase'
 import GlowBackground from '../components/GlowBackground'
 
-const GROQ_API_KEY = process.env.EXPO_PUBLIC_GROQ_API_KEY || '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'
+const GROQ_API_KEY = process.env.EXPO_PUBLIC_GROQ_API_KEY
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
-
-if (!process.env.EXPO_PUBLIC_GROQ_API_KEY) {
-  console.warn(
-    'Groq API Key (EXPO_PUBLIC_GROQ_API_KEY) is missing! Using fallback Groq API key.'
-  )
-}
 
 // Safe Web-only custom style definitions
 const webStyles = {
@@ -129,7 +123,7 @@ export default function ChatScreen({ navigation }) {
       .select('interests(name)')
       .eq('user_id', user.id)
     if (data) {
-      const names = data.map(d => d.interests.name)
+      const names = data.map(d => d.interests?.name).filter(Boolean)
       setUserInterests(names)
     }
   }
